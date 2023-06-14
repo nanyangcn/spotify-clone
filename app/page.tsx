@@ -3,5 +3,5 @@ export default function Home() {
     <div className="text-green-500">
       Spotify
     </div>
-  )
+  );
 }
