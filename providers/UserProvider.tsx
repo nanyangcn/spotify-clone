@@ -6,12 +6,10 @@ interface UserProviderProps {
   children: React.ReactNode;
 }
 
-function UserProvider({ children }: UserProviderProps) {
-  return (
-    <MyUserContextProvider>
-      {children}
-    </MyUserContextProvider>
-  );
-}
+const UserProvider = ({ children }: UserProviderProps) => (
+  <MyUserContextProvider>
+    {children}
+  </MyUserContextProvider>
+);
 
 export default UserProvider;

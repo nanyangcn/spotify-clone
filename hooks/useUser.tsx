@@ -20,7 +20,7 @@ export interface Props {
   [propName: string]: unknown;
 }
 
-export function MyUserContextProvider(props: Props) {
+export const MyUserContextProvider = (props: Props) => {
   const {
     session,
     isLoading: isLoadingUser,
@@ -76,7 +76,7 @@ export function MyUserContextProvider(props: Props) {
 
   // eslint-disable-next-line react/jsx-props-no-spreading
   return <UserContext.Provider value={value} {...props} />;
-}
+};
 
 export const useUser = () => {
   const context = useContext(UserContext);

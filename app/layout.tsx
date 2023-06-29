@@ -4,6 +4,8 @@ import { Figtree } from 'next/font/google';
 import Sidebar from '@/components/Sidebar';
 import SupabaseProvider from '@/providers/SupabaseProvider';
 import UserProvider from '@/providers/UserProvider';
+import ModalProvider from '@/providers/ModalProvider';
+import ToasterProvider from '@/providers/ToasterProvider';
 
 const font = Figtree({ subsets: ['latin'] });
 
@@ -12,22 +14,24 @@ export const metadata = {
   description: 'Let\'s play Spotify!',
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: {
   children: React.ReactNode
-}) {
-  return (
-    <html lang="en">
-      <body className={font.className}>
-        <SupabaseProvider>
-          <UserProvider>
-            <Sidebar>
-              {children}
-            </Sidebar>
-          </UserProvider>
-        </SupabaseProvider>
-      </body>
-    </html>
-  );
-}
+}) => (
+  <html lang="en">
+    <body className={font.className}>
+      <ToasterProvider />
+      <SupabaseProvider>
+        <UserProvider>
+          <ModalProvider />
+          <Sidebar>
+            {children}
+          </Sidebar>
+        </UserProvider>
+      </SupabaseProvider>
+    </body>
+  </html>
+);
+
+export default RootLayout;

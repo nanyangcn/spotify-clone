@@ -11,10 +11,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     children,
     disabled,
     className = '',
-    type = 'button',
+    type,
+    onClick,
   }: ButtonProps, ref) => (
     <button
-      type={type ? 'button' : 'submit'}
+      onClick={onClick}
+      type={type === 'submit' ? 'submit' : 'button'}
       className={twMerge(
         `w-full rounded-full border border-transparent bg-green-500 p-3
           font-bold text-black transition hover:opacity-75

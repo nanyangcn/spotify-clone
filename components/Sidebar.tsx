@@ -13,7 +13,7 @@ interface SidebarProps {
   children: React.ReactNode
 }
 
-function Sidebar({ children }: SidebarProps) {
+const Sidebar = ({ children }: SidebarProps) => {
   const pathname = usePathname();
 
   const routes = useMemo(() => [
@@ -54,6 +54,6 @@ function Sidebar({ children }: SidebarProps) {
       </main>
     </div>
   );
-}
+};
 
 export default Sidebar;

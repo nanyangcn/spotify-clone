@@ -10,7 +10,7 @@ interface ListItemProps {
   href: string;
 }
 
-function ListItem({ image, name, href }: ListItemProps) {
+const ListItem = ({ image, name, href }: ListItemProps) => {
   const router = useRouter();
 
   const onClick = () => {
@@ -45,6 +45,6 @@ function ListItem({ image, name, href }: ListItemProps) {
       </div>
     </button>
   );
-}
+};
 
 export default ListItem;

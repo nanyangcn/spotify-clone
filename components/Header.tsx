@@ -5,19 +5,37 @@ import { twMerge } from 'tailwind-merge';
 import { RxCaretLeft, RxCaretRight } from 'react-icons/rx';
 import { HiHome } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
+
+import useAuthModal from '@/hooks/useAuthModal';
+import { useUser } from '@/hooks/useUser';
 
 import Button from '@/components/Button';
+import { FaUserAlt } from 'react-icons/fa';
+import { toast } from 'react-hot-toast';
 
 interface HeaderProps {
   children: React.ReactNode;
   className?: string;
 }
 
-function Header({ children, className = '' }: HeaderProps) {
+const Header = ({ children, className = '' }: HeaderProps) => {
+  const authModal = useAuthModal();
   const router = useRouter();
 
-  const handlelogout = () => {
-    console.log('logout');
+  const supabaseClient = useSupabaseClient();
+  const { user } = useUser();
+
+  const handleLogout = () => {
+    supabaseClient.auth.signOut()
+      .then(() => {
+        // TODO: Reset any playing songs.
+        router.refresh();
+
+        toast.success('Logged out');
+      }).catch((error: { message: string }) => {
+        toast.error(error.message);
+      });
   };
 
   return (
@@ -60,32 +78,28 @@ function Header({ children, className = '' }: HeaderProps) {
           </button>
         </div>
         <div className="flex items-center justify-between gap-x-4">
-          {true
+          {user
             ? (
-              <>
-                <div>
-                  <Button
-                    onClick={() => { }}
-                    className="bg-transparent font-medium text-neutral-300"
-                  >
-                    Sign up
-                  </Button>
-                </div>
-                <div>
-                  <Button
-                    onClick={() => { }}
-                    className="bg-white px-6 py-2"
-                  >
-                    Login
-                  </Button>
-                </div>
-              </>
+              <div className="flex items-center gap-x-4">
+                <Button
+                  className="bg-white px-6 py-2"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
+                <Button
+                  className="bg-white"
+                  onClick={() => router.push('/account')}
+                >
+                  <FaUserAlt />
+                </Button>
+              </div>
             )
             : (
               <>
                 <div>
                   <Button
-                    onClick={() => { }}
+                    onClick={authModal.onOpen}
                     className="bg-transparent font-medium text-neutral-300"
                   >
                     Sign up
@@ -93,7 +107,7 @@ function Header({ children, className = '' }: HeaderProps) {
                 </div>
                 <div>
                   <Button
-                    onClick={() => { }}
+                    onClick={authModal.onOpen}
                     className="bg-white px-6 py-2"
                   >
                     Login
@@ -106,6 +120,6 @@ function Header({ children, className = '' }: HeaderProps) {
       {children}
     </div>
   );
-}
+};
 
 export default Header;
