@@ -1,4 +1,7 @@
 import Stripe from 'stripe';
+import { Database } from './supabase';
+
+export type Song = Database['public']['Tables']['songs']['Row'];
 
 export interface UserDetails {
   id: string;
