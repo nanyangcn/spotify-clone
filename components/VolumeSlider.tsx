@@ -18,7 +18,7 @@ const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
         style={progressBarStyle}
       />
       <input
-        className="VolumeSlider h-10 w-[100px] cursor-pointer appearance-none bg-transparent focus:outline-none"
+        className="Slider h-10 w-[100px] cursor-pointer appearance-none bg-transparent focus:outline-none"
         type="range"
         value={volume}
         onChange={(e) => setVolume(Number(e.target.value))}
