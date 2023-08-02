@@ -19,7 +19,6 @@ const MediaItem = ({ onClick, song, className = '' }: MediaItemProps) => {
     if (onClick) {
       return onClick(song.id);
     }
-    // TODO: Default turn on player
     return null;
   };
   return (
@@ -35,6 +34,7 @@ const MediaItem = ({ onClick, song, className = '' }: MediaItemProps) => {
         <Image
           src={imageUrl || '/images/liked.png'}
           fill
+          sizes="100px"
           alt="Media Item"
           className="object-cover"
         />

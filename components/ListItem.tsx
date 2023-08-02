@@ -29,6 +29,7 @@ const ListItem = ({ image, name, href }: ListItemProps) => {
         <Image
           className="object-cover "
           fill
+          sizes="100px"
           src={image}
           alt="Image"
         />

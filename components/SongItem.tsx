@@ -28,7 +28,9 @@ const SongItem = ({ song, onClick }: SongItemProps) => {
           className="object-cover"
           src={imagePath || '/images/liked.png'}
           fill
+          sizes="300px"
           alt="image"
+          priority
         />
         <button
           type="button"
