@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react';
 import { useSessionContext } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/navigation';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { toast } from 'react-hot-toast';
 
 import { useUser } from '@/hooks/useUser';
 import useAuthModal from '@/hooks/useAuthModal';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { toast } from 'react-hot-toast';
 
 interface LikeButtonProps {
   songId: number;
@@ -28,14 +28,14 @@ const LikeButton = ({ songId }: LikeButtonProps) => {
     }
 
     const fetchData = async () => {
-      const { data, error } = await supabaseClient
+      const res = await supabaseClient
         .from('liked_songs')
         .select('*')
         .eq('user_id', user.id)
         .eq('song_id', songId)
         .single();
 
-      if (!error && data) {
+      if (!res.error && res.data) {
         setIsLiked(true);
       }
     };

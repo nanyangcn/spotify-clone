@@ -6,13 +6,13 @@ import { RxCaretLeft, RxCaretRight } from 'react-icons/rx';
 import { HiHome } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { FaUserAlt } from 'react-icons/fa';
+import { toast } from 'react-hot-toast';
 
 import useAuthModal from '@/hooks/useAuthModal';
 import { useUser } from '@/hooks/useUser';
 
 import Button from '@/components/Button';
-import { FaUserAlt } from 'react-icons/fa';
-import { toast } from 'react-hot-toast';
 
 interface HeaderProps {
   children: React.ReactNode;

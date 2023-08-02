@@ -1,9 +1,10 @@
 'use Client';
 
+import { FaPlay } from 'react-icons/fa';
 import Image from 'next/image';
+
 import useLoadImage from '@/hooks/useLoadImage';
 import { Song } from '@/types/types';
-import { FaPlay } from 'react-icons/fa';
 
 interface SongItemProps {
   song: Song;
@@ -15,7 +16,10 @@ const SongItem = ({ song, onClick }: SongItemProps) => {
 
   return (
     <div
-      // onClick={() => onClick(song.id)}
+      onClick={() => onClick(song.id)}
+      onKeyDown={() => onClick(song.id)}
+      role="button"
+      tabIndex={0}
       className="group relative flex cursor-pointer flex-col items-center justify-center
       gap-x-4 overflow-hidden rounded-md bg-neutral-400/5 p-3 transition hover:bg-neutral-400/10"
     >
@@ -26,13 +30,15 @@ const SongItem = ({ song, onClick }: SongItemProps) => {
           fill
           alt="image"
         />
-        <div
+        <button
+          type="button"
           className="absolute bottom-0 right-2 flex items-center justify-center
           rounded-full bg-green-500 p-4 opacity-0 drop-shadow-md transition duration-300
           group-hover:-translate-y-2 group-hover:opacity-100"
+          onClick={() => onClick(song.id)}
         >
           <FaPlay className="translate-x-[1.5px] text-black" />
-        </div>
+        </button>
       </div>
       <div className="flex w-full flex-col items-start gap-y-2 px-2 pb-2 pt-4">
         <p className="w-full truncate font-semibold">

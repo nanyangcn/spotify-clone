@@ -14,7 +14,6 @@ module.exports = {
     'airbnb/hooks',
     'plugin:tailwindcss/recommended',
     'next',
-    'plugin:@next/next/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {

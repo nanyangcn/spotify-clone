@@ -4,11 +4,13 @@ import { useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 import { HiHome } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
+import { twMerge } from 'tailwind-merge';
 
 import Box from '@/components/Box';
 import SidebarItem from '@/components/SidebarItem';
 import Library from '@/components/Library';
 import { Song } from '@/types/types';
+import usePlayer from '@/hooks/usePlayer';
 
 interface SidebarProps {
   songs: Song[]
@@ -17,6 +19,7 @@ interface SidebarProps {
 
 const Sidebar = ({ songs, children }: SidebarProps) => {
   const pathname = usePathname();
+  const player = usePlayer();
 
   const routes = useMemo(() => [
     {
@@ -34,7 +37,11 @@ const Sidebar = ({ songs, children }: SidebarProps) => {
   ], [pathname]);
 
   return (
-    <div className="flex h-full">
+    <div className={twMerge(
+      'flex h-full',
+      player.activeId && 'h-[calc(100%-80px)]',
+    )}
+    >
       <div className="hidden h-full w-[300px] flex-col gap-y-2 bg-black p-2 md:flex">
         <Box className="flex flex-col gap-y-4 px-5 py-4">
           {routes.map((route) => (
