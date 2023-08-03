@@ -7,7 +7,7 @@ import { AiFillStepBackward, AiFillStepForward } from 'react-icons/ai';
 import {
   ImVolumeHigh, ImVolumeLow, ImVolumeMute2, ImVolumeMedium,
 } from 'react-icons/im';
-import { Howl } from 'howler';
+import type { Howl } from 'howler';
 
 import { Song } from '@/types/types';
 import usePlayer from '@/hooks/usePlayer';
