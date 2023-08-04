@@ -1,16 +1,12 @@
 import Stripe from 'stripe';
-import { Database } from './supabase';
 
-export type Song = Database['public']['Tables']['songs']['Row'];
-
-export interface UserDetails {
-  id: string;
-  first_name: string;
-  last_name: string;
-  full_name?: string;
-  avatar_url?: string;
-  billing_address?: Stripe.Address;
-  payment_method?: Stripe.PaymentMethod[Stripe.PaymentMethod.Type];
+export interface Song {
+  id: number;
+  user_id: string;
+  author: string;
+  title: string;
+  song_path: string;
+  image_path: string;
 }
 
 export interface Product {
@@ -35,6 +31,25 @@ export interface Price {
   trial_period_days?: number | null;
   metadata?: Stripe.Metadata;
   products?: Product;
+}
+
+export interface ProductWithPrice extends Product {
+  prices?: Price[];
+}
+
+export interface Customer {
+  id: string;
+  stripe_customer_id?: string;
+}
+
+export interface UserDetails {
+  id: string;
+  first_name: string;
+  last_name: string;
+  full_name?: string;
+  avatar_url?: string;
+  billing_address?: Stripe.Address;
+  payment_method?: Stripe.PaymentMethod[Stripe.PaymentMethod.Type];
 }
 
 export interface Subscription {

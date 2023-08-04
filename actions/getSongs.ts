@@ -18,6 +18,9 @@ const getSongs = async () => {
     throw new Error(error.message);
   }
 
-  return data as Song[] || [];
+  if (!data) {
+    return [];
+  }
+  return data as Song[];
 };
 export default getSongs;

@@ -8,7 +8,7 @@ import { Song } from '@/types/types';
 
 interface SongItemProps {
   song: Song;
-  onClick: (id: number) => void;
+  onClick: (id: string | number) => void;
 }
 
 const SongItem = ({ song, onClick }: SongItemProps) => {

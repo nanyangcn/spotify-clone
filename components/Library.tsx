@@ -6,9 +6,10 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import useAuthModal from '@/hooks/useAuthModal';
 import useUploadModal from '@/hooks/useUploadModal';
 import { useUser } from '@/hooks/useUser';
-import { Song } from '@/types/types';
-import MediaItem from '@/components/MediaItem';
 import useOnPlay from '@/hooks/useOnPlay';
+import useSubscribeModal from '@/hooks/useSubscribeModal';
+import MediaItem from '@/components/MediaItem';
+import { Song } from '@/types/types';
 
 interface LibraryProps {
   songs: Song[];
@@ -16,7 +17,9 @@ interface LibraryProps {
 
 const Library = ({ songs }: LibraryProps) => {
   const authModal = useAuthModal();
-  const UploadModal = useUploadModal();
+  const uploadModal = useUploadModal();
+  const subscribeModal = useSubscribeModal();
+
   const { user, subscription } = useUser();
   const onPlay = useOnPlay(songs);
 
@@ -25,9 +28,11 @@ const Library = ({ songs }: LibraryProps) => {
       return authModal.onOpen();
     }
 
-    // TODO: Check for subscription
+    if (!subscription) {
+      return subscribeModal.onOpen();
+    }
 
-    return UploadModal.onOpen();
+    return uploadModal.onOpen();
   };
 
   return (

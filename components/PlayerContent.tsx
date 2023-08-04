@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import useSound from 'use-sound';
 import { BsPauseFill, BsPlayFill } from 'react-icons/bs';
 import { AiFillStepBackward, AiFillStepForward } from 'react-icons/ai';
+import { BiLoaderAlt } from 'react-icons/bi';
 import {
   ImVolumeHigh, ImVolumeLow, ImVolumeMute2, ImVolumeMedium,
 } from 'react-icons/im';
@@ -157,7 +158,9 @@ const PlayerContent = ({
             onClick={onPlayPrevious}
           />
           <div className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white p-1">
-            <Icon size={30} className="text-black" onClick={handlePlay} />
+            {duration
+              ? (<Icon size={30} className="text-black" onClick={handlePlay} />)
+              : (<BiLoaderAlt className="animate-spin text-2xl text-black" />)}
           </div>
           <AiFillStepForward
             size={30}

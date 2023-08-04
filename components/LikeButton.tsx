@@ -10,7 +10,7 @@ import { useUser } from '@/hooks/useUser';
 import useAuthModal from '@/hooks/useAuthModal';
 
 interface LikeButtonProps {
-  songId: number;
+  songId: number | string;
 }
 
 const LikeButton = ({ songId }: LikeButtonProps) => {

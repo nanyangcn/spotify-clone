@@ -5,6 +5,7 @@ import {
 } from 'react-hook-form';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 import Modal from '@/components/Modal';
 import Input from '@/components/Input';
@@ -12,7 +13,6 @@ import Button from '@/components/Button';
 
 import useUploadModal from '@/hooks/useUploadModal';
 import { useUser } from '@/hooks/useUser';
-import { useRouter } from 'next/navigation';
 
 const UploadModal = () => {
   const [isLoading, setIsLoading] = useState(false);

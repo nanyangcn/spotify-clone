@@ -1,6 +1,6 @@
 import { Price } from '@/types/types';
 
-export const gerUrl = () => {
+export const getUrl = () => {
   let url = process.env.NEXT_PUBLIC_SITE_URL
     ?? process.env.NEXT_PUBLIC_VERCEL_URL
     ?? 'http://localhost:3000';
@@ -11,7 +11,7 @@ export const gerUrl = () => {
   return url;
 };
 
-export const postData = async ({
+export const postData = async <T>({
   url,
   data,
 }: {
@@ -31,7 +31,7 @@ export const postData = async ({
     throw new Error(res.statusText);
   }
 
-  return res.json();
+  return res.json() as T;
 };
 
 export const toDateTime = (secs: number) => {

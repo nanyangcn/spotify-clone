@@ -102,7 +102,7 @@ const createOrRetrieveCustomer = async ({
 
     console.log(`Customer created: ${customer.id}`);
 
-    return customer;
+    return customer.id;
   }
 
   return data.stripe_customer_id;
@@ -166,6 +166,7 @@ const manageSubscriptionsStatusChange = async (
     metadata: subscription.metadata,
     status: subscription.status,
     price_id: subscription.items.data[0]?.price.id,
+    quantity: subscription.items.data[0]?.quantity,
     cancel_at_period_end: subscription.cancel_at_period_end,
     cancel_at: subscription.cancel_at ? toDateTime(subscription.cancel_at).toISOString() : null,
     canceled_at: subscription.canceled_at ? toDateTime(subscription.canceled_at).toISOString() : null,
