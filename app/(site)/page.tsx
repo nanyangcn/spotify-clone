@@ -9,7 +9,7 @@ const Home = async () => {
   const songs = await getSongs();
 
   return (
-    <div className="h-full w-full overflow-hidden overflow-y-auto rounded-lg bg-neutral-900">
+    <div className="h-full w-full overflow-hidden overflow-y-auto bg-neutral-900 md:rounded-lg">
       <Header>
         <div className="mb-2">
           <h1 className="text-3xl font-semibold text-white">

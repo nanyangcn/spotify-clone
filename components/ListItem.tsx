@@ -3,6 +3,8 @@
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { FaPlay } from 'react-icons/fa';
+import { useUser } from '@/hooks/useUser';
+import useAuthModal from '@/hooks/useAuthModal';
 
 interface ListItemProps {
   image: string;
@@ -12,10 +14,14 @@ interface ListItemProps {
 
 const ListItem = ({ image, name, href }: ListItemProps) => {
   const router = useRouter();
+  const { user, isLoading } = useUser();
+  const authModal = useAuthModal();
 
   const onClick = () => {
-    // Add authentication before push
-    router.push(href);
+    if (!isLoading && !user) {
+      return authModal.onOpen();
+    }
+    return router.push(href);
   };
 
   return (
@@ -37,13 +43,13 @@ const ListItem = ({ image, name, href }: ListItemProps) => {
       <p className="truncate py-5 font-medium">
         {name}
       </p>
-      <div
+      {/* <div
         className="absolute right-5 flex items-center justify-center
         rounded-full bg-green-500 p-4 opacity-90 drop-shadow-md transition
         hover:scale-110 group-hover:opacity-100"
       >
         <FaPlay className="translate-x-[1.5px] text-black" />
-      </div>
+      </div> */}
     </button>
   );
 };

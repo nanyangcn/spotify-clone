@@ -15,7 +15,7 @@ const getSongsByUserId = async () => {
   } = await supabase.auth.getSession();
 
   if (sessionError) {
-    throw new Error(sessionError.message);
+    console.error(sessionError.message);
   }
 
   const { data, error } = await supabase

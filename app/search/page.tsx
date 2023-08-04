@@ -14,10 +14,8 @@ const Search = async ({ searchParams }: SearchProps) => {
 
   return (
     <div className="h-full w-full overflow-hidden overflow-y-auto rounded-lg bg-neutral-900">
-      <Header className="relative from-neutral-900">
-        <div className="absolute left-28 top-6">
-          <SearchInput />
-        </div>
+      <Header className="from-neutral-900">
+        <SearchInput />
       </Header>
       <SearchContent songs={songs} />
     </div>

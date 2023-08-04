@@ -33,7 +33,7 @@ const SearchInput = () => {
       </div>
       <Input
         type="text"
-        className="h-12 w-[360px] rounded-full border border-transparent bg-neutral-700/50 pl-9 pr-4
+        className="h-12 w-full rounded-full border border-transparent bg-neutral-700/50 pl-9 pr-4
         outline-2 outline-white hover:border hover:border-neutral-500/50 hover:bg-neutral-700 focus:outline"
         placeholder="What do you want to listen to?"
         value={value}
