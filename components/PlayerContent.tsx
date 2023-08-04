@@ -28,6 +28,7 @@ const PlayerContent = ({
 }: PlayerContentProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currTime, setCurrTime] = useState(0);
+  const [isProgressBarPressed, setIsProgressBarPressed] = useState(false);
 
   const player = usePlayer();
 
@@ -109,12 +110,12 @@ const PlayerContent = ({
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (sound) {
+      if (sound && !isProgressBarPressed) {
         setCurrTime(Math.round(sound.seek()));
       }
     }, 100);
     return () => clearInterval(interval);
-  }, [sound]);
+  }, [sound, isProgressBarPressed]);
 
   const handlePlay = () => {
     if (isPlaying) {
@@ -137,6 +138,19 @@ const PlayerContent = ({
     // 100 is the width of the progressbar in px
       width: `${((currTime / songDurationInSeconds) * (100 - 12 / (100 / 100)))}%`,
     },
+  };
+
+  const handleProgressBarMouseDown = () => {
+    setIsProgressBarPressed(true);
+
+    setTimeout(() => {
+      setIsProgressBarPressed(false);
+    }, 5000);
+  };
+
+  const handleProgressBarMouseUp = (value: number) => {
+    sound?.seek(Number(value));
+    setIsProgressBarPressed(false);
   };
 
   return (
@@ -192,7 +206,9 @@ const PlayerContent = ({
               min={0}
               max={songDurationInSeconds}
               value={currTime}
-              onChange={(e) => sound?.seek(Number(e.target.value))}
+              onMouseDown={handleProgressBarMouseDown}
+              onMouseUp={(e) => handleProgressBarMouseUp(Number(e.currentTarget.value))}
+              onChange={(e) => setCurrTime(Number(e.target.value))}
             />
           </div>
           <p className="px-1 text-xs text-neutral-400">

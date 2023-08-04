@@ -1,10 +1,10 @@
 import { create } from 'zustand';
 
 interface PlayerStore {
-  ids: number[];
-  activeId?: number;
-  setId: (id: number) => void;
-  setIds: (ids: number[]) => void;
+  ids: number[] | string[];
+  activeId?: number | string;
+  setId: (id: number | string) => void;
+  setIds: (ids: number[] | string[]) => void;
   reset: () => void;
 }
 
