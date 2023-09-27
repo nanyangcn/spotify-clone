@@ -6,19 +6,22 @@ interface VolumeSliderProps {
 }
 
 const VolumeSlider = ({ volume, setVolume }: VolumeSliderProps) => {
-  const progressBarStyle = {
-    width: `${(volume * (100 - 12)) / 100}%`,
+  interface TypeStyle extends React.CSSProperties {
+    '--track-color': string,
+    '--progress-color': string,
+    '--progress-value': string,
+  }
+  const inputStyle: TypeStyle = {
+    '--track-color': '#4d4d4d',
+    '--progress-color': '#FFFFFF',
+    '--progress-value': `${volume}%`,
   };
 
   return (
     <div className="group relative flex items-center">
-      <div
-        className="pointer-events-none absolute top-[50%] h-1 origin-left translate-y-[-2px] scale-x-[1.136]
-        rounded-full bg-white group-hover:scale-x-100 group-hover:bg-[#1ED760]"
-        style={progressBarStyle}
-      />
       <input
         className="Slider h-10 w-[100px] cursor-pointer appearance-none bg-transparent focus:outline-none"
+        style={inputStyle}
         type="range"
         value={volume}
         onChange={(e) => setVolume(Number(e.target.value))}
